@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusExecutor - O Melhor Script Executor do Mercado</title>
+    <style>
+        /* --- VARIÁVEIS DE CORES GAMER/CYBERPUNK --- */
+        :root {
+            --primary-color: #10B981; /* Verde Limão / Neon */
+            --primary-hover: #059669;
+            --bg-dark: #0B0F19; /* Fundo principal ultra escuro */
+            --bg-card: #151D30; /* Fundo dos cards */
+            --text-main: #F3F4F6; /* Texto claro */
+            --text-muted: #9CA3AF; /* Cinza para descrição */
+            --white: #FFFFFF;
+            --accent-blue: #06B6D4; /* Ciano de destaque */
+            --card-shadow: 0 10px 25px -5px rgba(0, 245, 150, 0.05);
+            --transition: all 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- CABEÇALHO (NAVBAR) --- */
+        header {
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Indicador de Status Online */
+        .status-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+
+        .btn-nav {
+            background-color: var(--primary-color);
+            color: var(--bg-dark) !important;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .btn-nav:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- SEÇÃO HERO --- */
+        .hero {
+            padding: 180px 0 120px 0;
+            background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.05), transparent 40%),
+                        radial-gradient(circle at top left, rgba(16, 185, 129, 0.05), transparent 40%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text h1 {
+            font-size: 54px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            max-width: 600px;
+        }
+
+        .download-zone {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-main-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: var(--bg-dark);
+            padding: 16px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-main-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .version-info {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Mockup de Interface do Executor (Código simulado) */
+        .executor-mockup {
+            background-color: #090D16;
+            border: 1px solid #1E293B;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        .mockup-header {
+            background-color: #111827;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #EF4444;
+        }
+        .mockup-dot:nth-child(2) { background-color: #F59E0B; }
+        .mockup-dot:nth-child(3) { background-color: #10B981; }
+
+        .mockup-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .mockup-body {
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #A7F3D0;
+            min-height: 250px;
+        }
+
+        .mockup-body p { margin-bottom: 6px; }
+        .line-blue { color: #38BDF8; }
+        .line-gray { color: #64748B; }
+
+        .mockup-footer {
+            background-color: #111827;
+            padding: 10px 20px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #1E293B;
+        }
+
+        .mockup-btn {
+            padding: 6px 14px;
+            font-size: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            background-color: #1F2937;
+            color: var(--text-main);
+        }
+        .mockup-btn.execute {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        /* --- SEÇÃO RECURSOS (FEATURES) --- */
+        .features {
+            padding: 100px 0;
+            background-color: rgba(21, 29, 48, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 40px 30px;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            transition: var(--transition);
+            border: 1px solid #1E293B;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* --- SEÇÃO SEGURANÇA E INSTALAÇÃO --- */
+        .steps {
+            padding: 100px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step-item {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0 auto 20px auto;
+        }
+
+        .step-item h3 {
+            margin-bottom: 10px;
